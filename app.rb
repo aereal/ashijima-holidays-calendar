@@ -49,6 +49,19 @@ module AshijimaHoliday
   module Calendar
     def self.build(holidays)
       Icalendar::Calendar.new.tap {|cal|
+        cal.custom_property('X-WR-CALNAME', '葦島定休日')
+        cal.custom_property('X-WR-TIMEZONE', 'Asia/Tokyo')
+        cal.timezone do
+          timezone_id 'Asia/Tokyo'
+
+          standard do
+            timezone_offset_from '+0900'
+            timezone_offset_to '+0900'
+            timezone_name 'JST'
+            dtstart '19390101T000000'
+          end
+        end
+
         holidays.each do |start_on|
           cal.event do
             summary '定休日'
