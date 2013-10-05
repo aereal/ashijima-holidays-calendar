@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/WebApplication" itemscope>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+    <script src="js/sprintf.min.js"></script>
+    <script src="js/underscore.min.js"></script>
+    <script src="js/app.js"></script>
+    <title>葦島 定休日カレンダー</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1 itemprop="name">葦島 定休日カレンダー</h1>
+        <p itemprop="description">
+          <a href="http://ashijima.com/">喫茶葦島</a>の定休日をクロールして
+          <a href="http://www.ietf.org/rfc/rfc2445.txt">iCalendar 形式 [RFC2445]</a> で出力するサービスです。
+        </p>
+      </div>
+      <script id="get-latest-holidays" type="text/x-underscore-template">
+        <section>
+          <div class="page-header">
+            <h2>今月の定休日</h2>
+          </div>
+          <ul>
+            <% _.each(holidays, function (day) { %>
+            <li><time><%= day.date %></time></li>
+            <% }); %>
+          </ul>
+          <p>
+            <a class="btn btn-lg btn-primary" href="<%= url %>">
+              <span class="glyphicon glyphicon-download"></span>
+              <span class="glyphicon glyphicon-calendar"></span>
+              (iCalendar 形式)
+            </a>
+          </p>
+        </section>
+      </script>
+      <section>
+        <div class="page-header">
+          <h2>情報源</h2>
+        </div>
+        <p>
+          定休日の情報源は<a href="http://ashijimablog.com/%E5%AE%9A%E4%BC%91%E6%97%A5%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B/">定休日のお知らせ</a>です。
+        </p>
+      </section>
+      <section id="disclaimer">
+        <div class="page-header">
+          <h2>免責</h2>
+        </div>
+        <p>
+          予告なくサービスを中止する場合があります。<br>
+          また、第三者の HTML 文書をスクレイピングしている性質により、iCalendar 形式として妥当でない出力が得られる場合があります。
+        </p>
+        <p>
+          これらの問題が発生した場合に発生したいかなる損害等にも責任を負いません。<br>
+        </p>
+        <p>
+          ご理解の上、ご利用ください。
+        </p>
+      </section>
+      <footer id="author" itemprop="author" itemtype="http://schema.org/Person" itemscope>
+        <div class="page-header">
+          <h2>連絡先</h2>
+        </div>
+        <p>
+          このサービスは
+          <a href="http://aereal.org/" itemprop="url"><span itemprop="name">aereal</span></a>
+          が作成・公開しています。
+          連絡先は <a href="mailto:aereal@aereal.org" itemprop="email">aereal@aereal.org</a> です。
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
