@@ -54,15 +54,23 @@ module AshijimaHoliday
         cal.custom_property('X-WR-TIMEZONE', 'Asia/Tokyo')
         holidays.each do |start_on|
           cal.event do
-            custom_property('TZID', 'Asia/Tokyo')
-            custom_property('TZOFFSETFROM', '+0900')
-            custom_property('TZOFFSETTO', '+0900')
             summary '定休日'
             dtstart start_on.to_date, 'TZID' => 'Asia/Tokyo'
             dtend   start_on.to_date, 'TZID' => 'Asia/Tokyo'
           end
         end
         cal.publish
+
+        vtimezone_component = Icalendar::Component.new('VTIMEZONE').tap do |vtz|
+          vtz.custom_property('tzid', 'Asia/Tokyo')
+          vtz.add_component(Icalendar::Component.new('STANDARD').tap {|cmp|
+            cmp.custom_property('dtstart', '19700101T000000')
+            cmp.custom_property('tzoffsetfrom', '+0900')
+            cmp.custom_property('tzoffsetto', '+0900')
+            cmp.custom_property('tzname', 'JST')
+          })
+        end
+        cal.add(vtimezone_component)
       }
     end
   end
