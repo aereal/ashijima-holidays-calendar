@@ -2,7 +2,7 @@ require 'bundler' unless defined?(Bundler)
 Bundler.require
 
 module AshijimaHoliday
-  DB = Sequel.connect('postgres://aereal@localhost/ashijima_holiday')
+  DB = Sequel.connect(ENV['DATABASE_URL'] || 'postgres://aereal@localhost/ashijima_holiday')
 
   class Crawler
     INFO_URL      = 'http://ashijimablog.com/%E5%AE%9A%E4%BC%91%E6%97%A5%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B/'
