@@ -52,7 +52,8 @@ module AshijimaHoliday
         holidays.each do |start_on|
           cal.event do
             summary '定休日'
-            start start_on.to_datetime
+            dtstart start_on.to_date, 'TZID' => 'Asia/Tokyo'
+            dtend   start_on.to_date, 'TZID' => 'Asia/Tokyo'
           end
         end
         cal.publish
