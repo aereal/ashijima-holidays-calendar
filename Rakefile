@@ -4,7 +4,7 @@ include AshijimaHoliday
 
 namespace :db do
   task :migrate do
-    DB.create_table do
+    DB.create_table :holidays do
       primary_key :id
       column :start_on, :timestamp
       index :start_on, unique: true
